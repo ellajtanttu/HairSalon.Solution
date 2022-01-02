@@ -1,34 +1,22 @@
 using Microsoft.AspNetCore.Mvc;
 using HairSalon.Models;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace HairSalon.Controllers
 {
   public class ClientsController : Controller
   {
+    private readonly HairSalonContext _db;
 
-    [HttpGet("/stylists/{stylistId}/client/new")]
-    public ActionResult New(int stylistId)
+    public ClientsController(HairSalonContext db)
     {
-      Stylist stylist = Stylist.Find(stylistId);
-      return View(stylist);
+      _db = db;
     }
 
-    [HttpPost("/client/delete")]
-    public ActionResult DeleteAll()
+    public ActionResult Index()
     {
-      Client.ClearAll();
-      return View();
-    }
-
-    [HttpGet("/stylists/{stylistId}/client/{clientId}")]
-    public ActionResult Show(int stylistId, int clientId)
-    {
-      Client client = Client.Find(clientId);
-      Stylist stylist = Stylist.Find(stylistId);
-      Dictionary<string, object> model = new Dictionary<string, object>();
-      model.Add("client", client);
-      model.Add("stylist", stylist);
+      List<Client> model = _db.Clients.ToList();
       return View(model);
     }
   }
