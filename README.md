@@ -15,9 +15,9 @@
 
 ## Description
 
-`HairSalon DB Table will go here`
+<img src="HairSalon/wwwroot/img/HairSalon_DB_img.png" height="250px">
 
-TBD
+Easily add a list of stylists and their clients to this web application. See a list of each, select a stylist to view their clients, add and delete items from each list, and user is unable to add a client unless there is a stylist to assign them to. 
 
 ### Setup/Installation Requirements
 1. Download or clone github repository to local machine in desired directory - https://github.com/ellajtanttu/HairSalon.Solution
