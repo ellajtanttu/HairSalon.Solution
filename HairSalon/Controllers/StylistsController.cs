@@ -1,60 +1,71 @@
-// using System.Collections.Generic;
-// using System;
-// using Microsoft.AspNetCore.Mvc;
-// using HairSalon.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
+using HairSalon.Models;
+using System.Collections.Generic;
+using System.Linq;
 
-// namespace HairSalon.Controllers
-// {
-//   public class StylistController : Controller
-//   {
+namespace HairSalon.Controllers
+{
+  public class StylistsController : Controller
+  {
+    private readonly HairSalonContext _db;
 
-//     [HttpGet("/stylists")]
-//     public ActionResult Index()
-//     {
-//       List<Stylist> allStylists = Stylist.GetAll();
-//       return View(allStylists);
-//     }
+    public StylistsController(HairSalonContext db)
+    {
+      _db = db;
+    }
 
-//     [HttpGet("/stylists/new")]
-//     public ActionResult New()
-//     {
-//       return View();
-//     }
+    public ActionResult Index()
+    {
+      List<Stylist> model = _db.Stylists.ToList();
+      return View(model);
+    }
 
-//     [HttpPost("/stylists")]
-//     public ActionResult Create(string stylistName)
-//     {
-//       Stylist newStylist = new Stylist(stylistName);
-//       return RedirectToAction("Index");
-//     }
+    public ActionResult Create()
+    {
+      return View();
+    }
 
-//     [HttpGet("/stylists/{id}")]
-//     public ActionResult Show(int id)
-//     {
-//       Dictionary<string, object> model = new Dictionary<string, object>();
-//       Stylist selectedStylist = Stylist.Find(id);
-//       List<Client> stylistClients = selectedStylist.Clients;
-//       model.Add("stylist", selectedStylist);
-//       model.Add("clients", stylistClients);
-//       return View(model);
-//     }
+    [HttpPost]
+    public ActionResult Create(Stylist stylist)
+    {
+      _db.Stylists.Add(stylist);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
 
+    public ActionResult Details(int id)
+    {
+      Stylist thisStylist = _db.Stylists.FirstOrDefault(stylist => stylist.StylistId == id);
+      return View(thisStylist);
+    }
+    public ActionResult Edit(int id)
+    {
+      var thisStylist = _db.Stylists.FirstOrDefault(stylist => stylist.StylistId == id);
+      return View(thisStylist);
+    }
 
-//     This one creates new Clients within a given Stylist, not new Stylists:
+    [HttpPost]
+    public ActionResult Edit(Stylist stylist)
+    {
+      _db.Entry(stylist).State = EntityState.Modified;
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
 
-//     [HttpPost("/stylists/{stylistId}/clients")]
-//     public ActionResult Create(int stylistId, string clientName)
-//     {
-//       Dictionary<string, object> model = new Dictionary<string, object>();
-//       Stylist foundStylist = Stylist.Find(stylistId);
-//       Client newClient = new Client(clientName);
-//       newClient.Save();    // New code
-//       foundStylist.AddItem(newClient);
-//       List<Client> stylistClients = foundStylist.Clients;
-//       model.Add("clients", stylistClients);
-//       model.Add("stylist", foundStylist);
-//       return View("Show", model);
-//     }
+    public ActionResult Delete(int id)
+    {
+      var thisStylist = _db.Stylists.FirstOrDefault(stylist => stylist.StylistId == id);
+      return View(thisStylist);
+    }
 
-//   }
-// }
+    [HttpPost, ActionName("Delete")]
+    public ActionResult DeleteConfirmed(int id)
+    {
+      var thisStylist = _db.Stylists.FirstOrDefault(stylist => stylist.StylistId == id);
+      _db.Stylists.Remove(thisStylist);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
+  }
+}
