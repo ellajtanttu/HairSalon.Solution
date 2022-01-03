@@ -32,9 +32,9 @@ namespace HairSalon.Models
       return _instances[searchId-1];
     }
 
-    public void AddItem(Client item)
+    public void AddClient(Client client)
     {
-      Clients.Add(item);
+      Clients.Add(client);
     }
 
   }
