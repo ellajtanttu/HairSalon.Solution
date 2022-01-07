@@ -16,32 +16,32 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `Clients`
+-- Table structure for table `clients`
 --
 
-DROP TABLE IF EXISTS `Clients`;
+DROP TABLE IF EXISTS `clients`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `Clients` (
+CREATE TABLE `clients` (
   `ClientId` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(45) DEFAULT NULL,
   `StylistId` int(11) DEFAULT NULL,
   PRIMARY KEY (`ClientId`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `Stylists`
+-- Table structure for table `stylists`
 --
 
-DROP TABLE IF EXISTS `Stylists`;
+DROP TABLE IF EXISTS `stylists`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `Stylists` (
+CREATE TABLE `stylists` (
   `StylistId` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`StylistId`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -53,4 +53,4 @@ CREATE TABLE `Stylists` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-01-02 17:54:48
+-- Dump completed on 2022-01-07 11:57:31
